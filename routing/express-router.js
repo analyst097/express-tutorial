@@ -2,6 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
+const app = express();
 
 router.use((req, res, next) => {
   console.log("time:", Date.now());
@@ -16,4 +17,6 @@ router.get("/about", (req, res) => {
   res.send("about router");
 });
 
-module.exports = router;
+app.use("/", router);
+
+app.listen(3000);

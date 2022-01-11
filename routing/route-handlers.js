@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const app = require("express")();
 
 var cb0 = (req, res, next) => {
   console.log("first callback");
@@ -6,7 +6,7 @@ var cb0 = (req, res, next) => {
 };
 
 var cb1 = (req, res, next) => {
-  console.log("third callback");
+  console.log("second callback");
   next();
 };
 
@@ -15,10 +15,31 @@ var cb2 = (req, res) => {
   res.send("array of callbacks");
 };
 
-router.get("example/c", [cb0, cb1, cb2]);
+//Route handlers
+//You can provide multiple callback functions that behave like middleware to handle a request.
+
+//single callback
+app.get("/example/a", (req, res) => {
+  console.log("example/a");
+  res.send("one callback");
+});
+
+//more than one callback
+app.get(
+  "/example/b",
+  (req, res, next) => {
+    console.log("/example/b");
+    next();
+  },
+  (req, res) => {
+    res.send("two callbacks");
+  }
+);
+
+app.get("/example/c", [cb0, cb1, cb2]);
 
 //A combination of independent functions and arrays of functions can handle a route. For example:
-router.get(
+app.get(
   "/example/d",
   (req, res, next) => {
     console.log("combination of callbacks");
@@ -27,4 +48,4 @@ router.get(
   [cb0, cb1, cb2]
 );
 
-module.exports = router;
+app.listen(3000);

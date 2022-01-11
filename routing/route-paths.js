@@ -1,3 +1,4 @@
+const app = require("express")();
 const router = require("express").Router();
 
 //matches the route /about
@@ -40,4 +41,6 @@ router.get(/.*fly$/, (req, res) => {
   res.send("/regex");
 });
 
-module.exports = router;
+app.use("/", router);
+
+app.listen(3000);

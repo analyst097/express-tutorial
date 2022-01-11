@@ -7,7 +7,7 @@ const app = require("express")();
  */
 
 app.get("/users/:userId/books/:bookId", (req, res) => {
-  res.send("params:", req.params);
+  res.send("params:" + req.params.bookId + " " + req.params.userId);
 });
 
 /**
@@ -17,28 +17,7 @@ app.get("/users/:userId/books/:bookId", (req, res) => {
  */
 
 app.get("/flights/:from-:to", (req, res) => {
-  res.send("params:", req.params);
+  res.send("params:" + req.params.from + "-" + req.params.to);
 });
 
-//Route handlers
-//You can provide multiple callback functions that behave like middleware to handle a request.
-
-//single callback
-app.get("/example/a", (req, res) => {
-  console.log("example/a");
-  res.send("one callback");
-});
-
-//more than one callback
-app.get(
-  "/example/b",
-  (req, res, next) => {
-    console.log("/example/b");
-    next();
-  },
-  (req, res) => {
-    res.send("two callbacks");
-  }
-);
-
-module.exports = app;
+app.listen(3000);
