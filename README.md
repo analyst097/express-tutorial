@@ -1,6 +1,6 @@
 # Express Framework Tutorial
 
-This repository includes the basic syntax of the following topics in express -
+This repository includes the basic syntax of the following topics in Express 4.x -
 
 1. Routing
 2. Writing middleware
